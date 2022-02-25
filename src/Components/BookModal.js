@@ -44,6 +44,16 @@ const Image = styled.img`
   object-fit: contain;
   float: left;
   margin-right: auto;
+  @media only screen and (max-width: 800px) {
+    float: none;
+    display: inline-block;
+    height: 180px;
+    width: 40%;
+  }
+  @media only screen and (max-width: 600px) {
+    width: 60%;
+    height: 150px;
+  }
 `;
 
 const TextContainer = styled.div`
@@ -52,6 +62,17 @@ const TextContainer = styled.div`
   margin: 10px 0;
   box-sizing: border-box;
   padding: 5px 15px;
+  @media only screen and (max-width: 800px) {
+    float: none;
+    margin-right: auto;
+    margin-left: auto;
+    padding: 5px 10px;
+    width: 80%;
+  }
+  @media only screen and (max-width: 600px) {
+    padding: 5px 5px;
+    width: 90%;
+  }
 `;
 
 const Title = styled.h4`
@@ -67,6 +88,19 @@ const Desc = styled.p`
   letter-spacing: 0.2px;
   line-height: 22px;
   font-size: 14px;
+  @media only screen and (max-width: 800px) {
+    max-height: 330px;
+    letter-spacing: 0.1px;
+    word-spacing: 0.7px;
+    font-size: 13px;
+  }
+  @media only screen and (max-width: 600px) {
+    max-height: 250px;
+    font-size: 12px;
+  }
+  @media only screen and (max-height: 700px) {
+    max-height: 250px;
+  }
 `;
 const Author = styled.h5`
   margin: 2px;
@@ -85,18 +119,17 @@ const Date = styled.p`
 `;
 export default function LoginModal({ book, isOpen, onClose }) {
   if (!isOpen) return null;
-  console.log(book);
   return (
     <>
       <div style={OVERLAY_STYLES} onClick={onClose} />
-      <div style={MODAL_STYLES}>
+      <div style={MODAL_STYLES} className="a">
         <Image src={book.volumeInfo.imageLinks.smallThumbnail} />
         <CloseIcon onClick={onClose} />
         <TextContainer>
           <Title>{book.volumeInfo.title}</Title>
           <Date>({book.volumeInfo.publishedDate})</Date>
-          {book.volumeInfo.authors.map((a) => (
-            <Author>{a}</Author>
+          {book.volumeInfo.authors.map((a, i) => (
+            <Author key={i}>{a}</Author>
           ))}
           <Desc>{book.volumeInfo.description}</Desc>
         </TextContainer>

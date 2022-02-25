@@ -13,6 +13,6 @@
 
 <br/>
 <p float="left">
-<img src="public/images/appImage1.png" width="250"/>
-<img src="public/images/appImage2.png" width="250"/>
+<img src="public/images/appImage1.png" width="49%"/>
+<img src="public/images/appImage2.png" width="49%"/>
 </p>
