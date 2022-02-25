@@ -33,7 +33,7 @@ const Head = styled.h1`
     font-size: 27px;
   }
   @media only screen and (max-width: 600px) {
-    font-size: 25px;
+    font-size: 24px;
   }
   @media only screen and (max-width: 400px) {
     font-size: 22px;
