@@ -1,10 +1,7 @@
-import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import { BsSearch } from "react-icons/bs";
-import { useDispatch } from "react-redux";
-import { getBooks } from "../redux/BooksSlice";
 
-const Container = styled.div`
+export const Container = styled.div`
   background-image: url("images/headerbg.jpg");
   background-color: #cccccc;
   height: 350px;
@@ -22,7 +19,7 @@ const Container = styled.div`
   }
 `;
 
-const Head = styled.h1`
+export const Head = styled.h1`
   margin: 0;
   display: block;
   color: white;
@@ -40,7 +37,7 @@ const Head = styled.h1`
   }
 `;
 
-const SearchInput = styled.input`
+export const SearchInput = styled.input`
   width: 100%;
   box-sizing: border-box;
   padding: 15px;
@@ -62,7 +59,7 @@ const SearchInput = styled.input`
   }
 `;
 
-const Connective = styled.div`
+export const Connective = styled.div`
   width: 40%;
   display: block;
   position: relative;
@@ -77,8 +74,7 @@ const Connective = styled.div`
     width: 85%;
   }
 `;
-
-const SearchIcon = styled(BsSearch)`
+export const SearchIcon = styled(BsSearch)`
   position: absolute;
   font-size: 20px;
   top: 14px;
@@ -88,35 +84,7 @@ const SearchIcon = styled(BsSearch)`
     opacity: 0.6;
   }
 `;
-const SearchInputCont = styled.div`
+export const SearchInputCont = styled.div`
   width: 100%;
   position: relative;
 `;
-const Header = () => {
-  const [search, setSearch] = useState("");
-  const dispatch = useDispatch();
-  const handleSubmit = (e) => {
-    if (e) e.preventDefault();
-    dispatch(getBooks({ name: search }));
-  };
-
-  return (
-    <Container>
-      <Connective>
-        <Head>Dada Book Searching App</Head>
-        <SearchInputCont>
-          <form onSubmit={handleSubmit}>
-            <SearchInput
-              value={search}
-              onChange={(e) => setSearch(e.target.value)}
-              placeholder="Find book "
-            />
-            <SearchIcon onClick={handleSubmit} />
-          </form>
-        </SearchInputCont>
-      </Connective>
-    </Container>
-  );
-};
-
-export default Header;

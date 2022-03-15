@@ -1,18 +1,15 @@
-import React, { useState } from "react";
-import { useSelector } from "react-redux";
 import styled from "styled-components";
-import LoginModal from "./BookModal";
-
-const Container = styled.div`
+export const Container = styled.div`
   width: 98%;
   margin: auto;
   margin-top: 20px;
+  min-height: 55vh;
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
 `;
 
-const Book = styled.div`
+export const Book = styled.div`
   width: 300px;
   margin: 20px;
   display: inline-block;
@@ -35,7 +32,7 @@ const Book = styled.div`
   }
 `;
 
-const Image = styled.img`
+export const Image = styled.img`
   width: 95%;
   height: 220px;
   margin-left: auto;
@@ -54,7 +51,7 @@ const Image = styled.img`
   }
 `;
 
-const Title = styled.h5`
+export const Title = styled.h5`
   margin-top: 10px;
   font-size: 18px;
   @media only screen and (max-width: 1050) {
@@ -70,7 +67,7 @@ const Title = styled.h5`
     font-size: 12px;
   }
 `;
-const Author = styled.h6`
+export const Author = styled.h6`
   margin-top: 0;
   margin-bottom: 15px;
   display: inline-block;
@@ -93,7 +90,7 @@ const Author = styled.h6`
   }
 `;
 
-const Button = styled.a`
+export const Button = styled.a`
   display: inline-block;
   text-decoration: none;
   color: rgba(120, 120, 120);
@@ -115,7 +112,7 @@ const Button = styled.a`
   }
 `;
 
-const NothingToShow = styled.div`
+export const NothingToShow = styled.div`
   margin: 80px 0 40px;
   font-size: 45px;
   font-weight: 800;
@@ -129,63 +126,3 @@ const NothingToShow = styled.div`
     margin: 20px 0 10px;
   }
 `;
-
-const Content = () => {
-  const booksArr = useSelector((state) => state.BooksReducer.books);
-  const [selectedBook, setSelectedBook] = useState({});
-  const [isOpen, setIsOpen] = useState(false);
-
-  const openModal = (book) => {
-    setSelectedBook(book);
-    setIsOpen(true);
-  };
-  return (
-    <Container>
-      <LoginModal
-        book={selectedBook}
-        isOpen={isOpen}
-        onClose={() => setIsOpen(false)}
-      />
-      {booksArr && booksArr.length > 0 ? (
-        booksArr.map((book) => {
-          return (
-            book.volumeInfo.imageLinks &&
-            book.volumeInfo.authors && (
-              <Book key={book.id}>
-                <Image src={book.volumeInfo.imageLinks.smallThumbnail} />
-                <Title>{book.volumeInfo.title}</Title>
-                <Author>{book.volumeInfo.authors[0]}</Author>
-                <br />
-                <Button
-                  href={book.volumeInfo.previewLink}
-                  target="_blank"
-                  style={{ textAlign: "left" }}
-                >
-                  Preview
-                </Button>
-                <Button
-                  onClick={() => openModal(book)}
-                  style={{ textAlign: "right" }}
-                >
-                  Details
-                </Button>
-              </Book>
-            )
-          );
-        })
-      ) : (
-        <NothingToShow>
-          <div>
-            Nothing <br />
-            To
-            <br />
-            Show!?
-            <br />
-          </div>
-        </NothingToShow>
-      )}
-    </Container>
-  );
-};
-
-export default Content;
